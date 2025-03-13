@@ -1,10 +1,15 @@
 import mysql.connector
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def get_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="nida",  # New user
-        password="2822016abc@",  # Your password
-        database="library_db",  # Replace with your actual database name
-        auth_plugin="caching_sha2_password"  # Explicitly use caching_sha2_password
+        host=os.getenv("MYSQL_HOST"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        database=os.getenv("MYSQL_DATABASE"),
+        auth_plugin=os.getenv("MYSQL_AUTH_PLUGIN")
     )
