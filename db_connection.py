@@ -1,15 +1,13 @@
 import mysql.connector
-import os
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
+import streamlit as st
 
 def get_connection():
+    secrets = st.secrets["mysql"]  # Fetch secrets from Streamlit
+
     return mysql.connector.connect(
-        host=os.getenv("MYSQL_HOST"),
-        user=os.getenv("MYSQL_USER"),
-        password=os.getenv("MYSQL_PASSWORD"),
-        database=os.getenv("MYSQL_DATABASE"),
-        auth_plugin=os.getenv("MYSQL_AUTH_PLUGIN")
+        host=secrets["host"],
+        user=secrets["user"],
+        password=secrets["password"],
+        database=secrets["database"],
+        auth_plugin=secrets["auth_plugin"]
     )
